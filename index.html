@@ -1,222 +1,114 @@
 <!DOCTYPE html>
-<html lang="am">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>??? - ????? ?????? ?? ?????? ????</title>
+    <title>Natati - Green Initiative</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7f4;
-            color: #2c3e50;
-            line-height: 1.7;
-        }
-        header {
-            background: linear-gradient(135deg, #1b5e20, #2e7d32);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.8rem;
-        }
-        header p {
-            font-size: 1.3rem;
-            opacity: 0.9;
-            margin-top: 10px;
-        }
-        .nav-tabs {
-            display: flex;
-            justify-content: center;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .tab-btn {
-            padding: 15px 25px;
-            border: none;
-            background: none;
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #555;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .tab-btn:hover, .tab-btn.active {
-            color: #2e7d32;
-            border-bottom: 3px solid #2e7d32;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-        .card {
-            background: white;
-            padding: 35px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border-left: 6px solid #2e7d32;
-        }
-        h2 {
-            color: #1b5e20;
-            margin-top: 0;
-            border-bottom: 2px solid #e8f5e9;
-            padding-bottom: 10px;
-        }
-        .lang-box {
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 15px;
-            border: 1px solid #eee;
-        }
-        .lang-title {
-            font-weight: bold;
-            color: #c62828;
-            margin-bottom: 5px;
-        }
-        .badge-tech {
-            background-color: #e8f5e9;
-            color: #1b5e20;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            display: inline-block;
-            margin: 5px;
-        }
-        .qa-section {
-            max-height: 500px;
-            overflow-y: scroll;
-            padding-right: 10px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            padding: 15px;
-            background: #fafafa;
-        }
-        .qa-item {
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px;
-            border-radius: 6px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .question {
-            font-weight: bold;
-            color: #1b5e20;
-        }
-        .answer {
-            margin-top: 5px;
-            color: #555;
-        }
-        footer {
-            text-align: center;
-            padding: 30px;
-            background-color: #212121;
-            color: white;
-            margin-top: 60px;
-        }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f4f7f4; color: #2c3e50; line-height: 1.7; }
+        header { background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; padding: 60px 20px; text-align: center; }
+        header h1 { margin: 0; font-size: 2.8rem; }
+        header p { font-size: 1.3rem; opacity: 0.9; margin-top: 10px; }
+        .nav-tabs { display: flex; justify-content: center; background-color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .tab-btn { padding: 15px 25px; border: none; background: none; font-size: 1.1rem; font-weight: bold; color: #555; cursor: pointer; transition: all 0.3s ease; }
+        .tab-btn:hover, .tab-btn.active { color: #2e7d32; border-bottom: 3px solid #2e7d32; }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .card { background: white; padding: 35px; margin-bottom: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border-left: 6px solid #2e7d32; }
+        h2 { color: #1b5e20; margin-top: 0; border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .badge-tech { background-color: #e8f5e9; color: #1b5e20; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 5px; }
+        .qa-section { max-height: 500px; overflow-y: scroll; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; background: #fafafa; }
+        .qa-item { margin-bottom: 20px; background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .question { font-weight: bold; color: #1b5e20; }
+        .answer { margin-top: 5px; color: #555; }
+        footer { text-align: center; padding: 30px; background-color: #212121; color: white; margin-top: 60px; }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>??? - ????? ?????? (Green Initiative)</h1>
-        <p>?????? ???? ???? ???? ??? ????? ?? ????? ????? ????</p>
+        <h1>Natati - Green Initiative</h1>
+        <p>A Tech-Driven Climate Awareness and Global Warming Solutions Platform</p>
     </header>
-
     <div class="nav-tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'profile')">1. ??? ?????</button>
-        <button class="tab-btn" onclick="openTab(event, 'analysis')">2. ??? ???? (Bilingual)</button>
-        <button class="tab-btn" onclick="openTab(event, 'ethiopia-qa')">3. ?????? ???? & 50 Q&A</button>
-        <button class="tab-btn" onclick="openTab(event, 'solutions')">4. ?????? & ??? ????? ????</button>
+        <button class="tab-btn active" onclick="openTab(event, 'profile')">1. My Profile</button>
+        <button class="tab-btn" onclick="openTab(event, 'analysis')">2. Global Warming Analysis</button>
+        <button class="tab-btn" onclick="openTab(event, 'ethiopia-qa')">3. Ethiopia's Impact & 50 Q&A</button>
+        <button class="tab-btn" onclick="openTab(event, 'solutions')">4. Solutions & Vulnerable Nations</button>
     </div>
-
     <div class="container">
-        
-        <!-- ??? 1: ????? -->
         <div id="profile" class="tab-content active">
             <div class="card">
-                <h2>?? ?? ?? ?? EthioCoders ???? (My Profile)</h2>
-                <p>???! ?? ??? ????? ?????? ?12? ??? ???? ???? ?????? ?????? ???? ??? ????? ??? ???? ??? ??????? ???? (Computer Science) ??? ????? ?????? ??? ???? ???? ??? ??? ???? ??? ??? ??? ?? ????????? ????? ???</p>
-                <p>???? ??? ??? ????? ? <strong>EthioCoders</strong> ???? ?? ???? ????? ??????? ??? ??? ?????? ???? ???? ??? ?????????</p>
+                <h2>About Me & EthioCoders Experience</h2>
+                <p>Hello! My name is Natati. I am an aspiring Computer Science student and a passionate tech enthusiast from Ethiopia. My long-term vision is to secure a fully-funded scholarship in Qatar to acquire world-class education and develop innovative, problem-solving applications that can impact the world globally.</p>
+                <p>As a proud graduate of the national <strong>EthioCoders</strong> initiative, I have successfully mastered and earned certifications in four vital technology fields:</p>
                 <div>
-                    <span class="badge-tech">?? Programming</span>
-                    <span class="badge-tech">?? Android Development</span>
-                    <span class="badge-tech">?? AI Fundamentals</span>
-                    <span class="badge-tech">?? Data Analysis</span>
+                    <span class="badge-tech">💻 Programming</span>
+                    <span class="badge-tech">📱 Android Development</span>
+                    <span class="badge-tech">🤖 AI Fundamentals</span>
+                    <span class="badge-tech">📊 Data Analysis</span>
                 </div>
-                <p style="margin-top: 15px;"><strong>??? ??? (My Passion):</strong> ?????? ??? ?????? ??????? ?????? ??? ?? ? AI ???? ????? ???? ??? ?????? ????? ??? ?????? ??? ? "Global Warming" ???? ???? ???? ?????? ?????? ?? ???? ???????? ???? ???</p>
+                <p style="margin-top: 15px;"><strong>My Mission:</strong> I aim to synthesize my knowledge of Data Analysis, Android Development, and Artificial Intelligence to design scalable software architectures and smart products addressing critical climate crises like Global Warming.</p>
             </div>
         </div>
-
-        <!-- ??? 2: ??? ???? -->
         <div id="analysis" class="tab-content">
             <div class="card">
-                <h2>?? ??? ??? ???? ??? ???? (Comprehensive Analysis)</h2>
-                
-                <div class="lang-box">
-                    <div class="lang-title">???? ????? (Amharic Analysis)</div>
-                    <p>???? ??? ???? (Global Warming) ????? ???? ??? ??? ??? ???? ??????? ?? ??? ?? ???? ??? ??? (Greenhouse Gases) ????? ??? ???????? ????? ?????? ???? ???? ??? ????? ???? ???? ??? ?? ???? ?????? ?????? ??? ??? ??????? ???? ????? ???? ????? (Fossil Fuels) ?????? ???????? ???????? ???? ??? ????? ???? ????? ??? ???? ????? ???</p>
-                    <p>?? ???? ???? ??????? ??-????? ??? ????? ????? ???? ???? ??? ????? ?????? ???? ??? ??? ????? ?? ???? ??? ?? ?? ???? ????? ??? ????????? ??? ??????? ?????? ?? ???? ??? ???? ???? ????? (??? ??? ???? ?????? ??? ?? ??? ??? ????) ???? ????? ????? ?? ???? ???? ?????? ?????</p>
-                </div>
-
-                <div class="lang-box">
-                    <div class="lang-title">???? In English (English Analysis)</div>
-                    <p>Global warming refers to the long-term heating of Earth's climate system observed since the pre-industrial period due to human activities, primarily fossil fuel burning, which increases heat-trapping greenhouse gas levels in Earth's atmosphere. This process acts like a blanket over the planet, trapping solar radiation and causing average global temperatures to steadily rise.</p>
-                    <p>The consequences of global warming are catastrophic and far-reaching. They include melting glaciers, rising sea levels, ocean acidification, and a severe increase in the frequency of extreme weather events such as intense droughts, unprecedented heatwaves, and destructive floods. Mitigating this global crisis requires immediate worldwide cooperation to transition away from dirty fossil fuels toward green, sustainable energy solutions.</p>
-                </div>
+                <h2>Deep Analysis of Climate Change</h2>
+                <p>Global warming refers to the long-term heating of Earth's climate system observed since the pre-industrial period due to human activities, primarily fossil fuel burning, which increases heat-trapping greenhouse gas levels in Earth's atmosphere. This process acts like a massive thermal blanket over the planet, trapping solar radiation and causing average global temperatures to steadily rise at an unprecedented pace.</p>
+                <p>The downstream consequences of global warming are catastrophic and multifaceted. They include rapidly melting polar ice caps, thermal expansion of oceans leading to sea-level rise, ocean acidification, and a severe amplification in the frequency of extreme weather anomalies. These anomalies present themselves as prolonged mega-droughts, devastating wildfires, and catastrophic floods that continuously threaten biodiversity, agricultural stability, and human civilization. Mitigating this existential threat requires immediate, unified global action to transition toward sustainable, zero-emission green economies.</p>
             </div>
         </div>
-
-        <!-- ??? 3: ?????? ???? ?? 50 ????? -->
         <div id="ethiopia-qa" class="tab-content">
             <div class="card">
-                <h2>?????? ???? (Ethiopia's Experience)</h2>
-                <p>????? ??? ???? ????? ??? ??????? ????? ????? ???? ???? ??? ????? ???? ???? ?? ???? ??? ???????? ???? ??? ??? ???? ?????? ???? <strong>?????? ??? (Green Legacy Initiative)</strong> ???? ??? ???? ????? ????? ????? ???? ????? ???? ???? ???? ????? ??? ?? ????? ??????</p>
-                
-                <h2>?? Global Warming ? 50 ???? ???? ???? (50 Q&A Bank)</h2>
-                <p style="font-size: 0.9rem; color: #666;">(????? ?? ???? ?? ?? ?????? ???? 50 ????? ???? ????)</p>
-                <div class="qa-section" id="qaBank">
-                    <!-- JavaScript ???-?? 50 ?????? ??? ???? -->
-                </div>
+                <h2>Ethiopia's Climate Action & Experience</h2>
+                <p>Despite contributing minimally to global greenhouse gas emissions, Ethiopia remains highly vulnerable to climate shocks, experiencing devastating cycles of drought and seasonal flooding. In response to this challenge, the nation launched the ambitious <strong>Green Legacy Initiative</strong>, a massive re-reforestation campaign that has successfully planted billions of trees, serving as an inspiring model of localized environmental resilience and climate mitigation for developing countries.</p>
+                <h2>Global Warming Information Bank (50 Interactive Q&As)</h2>
+                <p style="font-size: 0.9rem; color: #666;">(Scroll down inside the box to read all 50 comprehensive questions and answers)</p>
+                <div class="qa-section" id="qaBank"></div>
             </div>
         </div>
-
-        <!-- ??? 4: ?????? -->
         <div id="solutions" class="tab-content">
             <div class="card">
-                <h2>???? ???? ???? ???? ????? (Practical Solutions)</h2>
-                <p>????? ??? ???? ?????? ???? ???? ?????? ???????? ??????? ??? ?? ???? ??????</p>
+                <h2>Actionable Everyday Solutions</h2>
+                <p>Combating global warming starts with small, daily behavioral adjustments that collectively reduce environmental degradation:</p>
                 <ul>
-                    <li><strong>???? ???? ?? ???????</strong> ?????? ?? ?? ????? ????? ???? ???? ?????</li>
-                    <li><strong>???? ?????? ?????</strong> ????? ?? ??? ??????? ?????? ?? ????? ?????</li>
-                    <li><strong>3Rs (Reduce, Reuse, Recycle) ?????</strong> ???? ???? ????? ??? ???? ?? ??? ??? ?? ??? ??????</li>
-                    <li><strong>???? ????</strong> ????? ?????? ???? ??? (?? ????? ????? ???? ???? ????)?</li>
+                    <li><strong>Reforestation:</strong> Actively planting and nurturing trees to maximize carbon sequestration.</li>
+                    <li><strong>Energy Efficiency:</strong> Transitioning to LED lighting and powering down electronics when not in use.</li>
+                    <li><strong>The 3 Rs:</strong> Rigidly adopting the principles of Reducing consumption, Reusing assets, and Recycling waste.</li>
+                    <li><strong>Digital Transformation:</strong> Minimizing paper waste by leveraging cloud-based platforms and digital awareness tools.</li>
                 </ul>
-
-                <h2>???? ???? ?? ???? ?????? (Role of Superpowers)</h2>
-                <p>??? ????? ??? ?? ????? ???? ?? ???? ??????? ???? ???? ???? ??? ?????? ??? ????? ???? ??????? ???? ??????</p>
+                <h2>The Role of Global Superpowers</h2>
                 <ul>
-                    <li>???? ?? ???? ??? ???? 100% ?? ???? ??? (???) ?? ??? ??? ??????</li>
-                    <li>?? ?? ???? ?? ?? ???? ???? ???? ???? ????? ???????? ??? ????? ?? ?????? ?????</li>
+                    <li>Completely phase out coal and fossil-fuel energy generation, replacing them with 100% wind, solar, and hydro power.</li>
+                    <li>Subsidize green technology transfer and provide significant adaptation funds to developing economies bearing the brunt of climate change.</li>
                 </ul>
-
-                <h2>???? ??? ???? ???? ??? ????? ????</h2>
-                <p>???? ???? ???? ???? ??? ???? ??? ????? ????? ??? ???? ??? ????? ??? ??????</p>
+                <h2>Most Vulnerable Nations to Climate Change</h2>
                 <ul>
-                    <li><strong>????? (Maldives) ?? ??? (Tuvalu)?</strong> ???? ??? ??? ????? ????? ?? ??? ??? ???? ??? ???????? ???? ????</li>
+                    <li><strong>The Maldives & Tuvalu:</strong> Low-lying island nations facing total submersion due to rising oceanic baselines.</li>
+                    <li><strong>Bangladesh:</strong> A nation constantly devastated by violent monsoons, storm surges, and displaced climate refugees.</li>
+                    <li><strong>Sub-Saharan Africa (including Ethiopia):</strong> Regions highly vulnerable to aggressive desertification, unpredictable rainfall patterns, and agricultural instability.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2026 Developed by Natati. Built with insights from the EthioCoders Initiative. All Rights Reserved.</p>
+    </footer>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.classList.add("active");
+        }
+        const qaBank = document.getElementById('qaBank');
+        const questionsList = [
+            {q: "What is the primary driving cause of modern global warming?", a: "The excessive accumulation of human-induced greenhouse gases trapping solar radiation in the atmosphere."},
+            {q: "Which specific gases are categorized as key greenhouse gases?", a: "Carbon Dioxide (CO2), Methane (CH4), Nitrous Oxide (N2O), and water vapor."},
+            {q: "How exactly does deforestation exacerbate the greenhouse effect?", a: "It eliminates trees that actively absorb CO2, while releasing stored carbon back into the atmosphere when burned or cleared."},
+            {q: "What triggers global sea-level rise?", a: "The thermal expansion of warming seawater combined with the accelerated melting of glaciers and polar ice sheets."},
