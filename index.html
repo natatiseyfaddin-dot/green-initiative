@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Climate Hub - Educational Initiative</title>
+    <title>Global Climate Encyclopedia & Public Learning Repository</title>
     <style>
         :root {
-            --bg-main: #0f172a;
-            --bg-sidebar: #1e293b;
+            --bg-main: #0b0f19;
+            --bg-sidebar: #131c2e;
             --accent-green: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.15);
+            --accent-glow: rgba(16, 185, 129, 0.2);
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --border-color: #334155;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --card-bg: rgba(22, 32, 54, 0.8);
+            --border-color: #1e293b;
+            --transition: all 0.3s ease;
         }
-
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
@@ -26,9 +25,8 @@
             display: flex;
             min-height: 100vh;
         }
-
         .sidebar {
-            width: 320px;
+            width: 340px;
             background-color: var(--bg-sidebar);
             border-right: 1px solid var(--border-color);
             position: fixed;
@@ -40,30 +38,26 @@
             padding: 40px 25px;
             z-index: 100;
         }
-
         .brand-zone h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 800;
             margin: 0;
             background: linear-gradient(135deg, #ffffff, var(--accent-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .brand-zone p {
             font-size: 0.85rem;
             color: var(--text-secondary);
-            margin: 5px 0 30px 0;
+            margin: 5px 0 40px 0;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
-
         .nav-menu {
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
-
         .tab-btn {
             display: flex;
             align-items: center;
@@ -78,85 +72,76 @@
             cursor: pointer;
             transition: var(--transition);
         }
-
         .tab-btn:hover {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
         }
-
         .tab-btn.active {
             color: var(--bg-main);
             background-color: var(--accent-green);
             box-shadow: 0 8px 24px var(--accent-glow);
             font-weight: 700;
         }
-
         .main-content {
-            margin-left: 320px;
+            margin-left: 340px;
             flex-grow: 1;
             padding: 60px 50px;
             max-width: 1200px;
         }
-
         .tab-content {
             display: none;
-            animation: slideUp 0.5s ease;
+            animation: slideUp 0.4s ease;
         }
-
         .tab-content.active {
             display: block;
         }
-
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         .hero-panel {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7));
             border: 1px solid var(--border-color);
-            padding: 40px;
+            padding: 45px;
             border-radius: 24px;
             margin-bottom: 40px;
         }
-
-        .hero-panel h2 { font-size: 2.2rem; margin: 0 0 15px 0; }
-        .hero-panel p { font-size: 1.15rem; color: var(--text-secondary); margin: 0; line-height: 1.8; }
-
+        .hero-panel h2 { font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; }
+        .hero-panel p { font-size: 1.2rem; color: var(--text-secondary); margin: 0; line-height: 1.8; }
         .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 35px;
-            margin-bottom: 30px;
+            padding: 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-
-        .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.5rem; }
-        .card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; }
-
+        .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.7rem; font-weight: 700; }
+        .card p { color: var(--text-secondary); font-size: 1.15rem; line-height: 1.9; }
         .database-container {
-            max-height: 600px;
-            overflow-y: auto;
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            padding: 25px;
-            background: rgba(15, 23, 42, 0.6);
+            padding: 30px;
+            background: rgba(15, 23, 42, 0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
-
         .db-row {
-            background: rgba(30, 41, 59, 0.4);
+            background: rgba(30, 41, 59, 0.3);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 15px;
+            padding: 25px;
+            transition: var(--transition);
         }
-
-        .db-query { font-weight: 700; color: var(--accent-green); margin-bottom: 5px; }
-        .db-response { color: var(--text-secondary); margin: 0; }
-
-        ul { color: var(--text-secondary); padding-left: 20px; font-size: 1.1rem; line-height: 1.8; }
-        li { margin-bottom: 10px; }
-
+        .db-row:hover {
+            border-color: var(--accent-green);
+            background: rgba(30, 41, 59, 0.5);
+        }
+        .db-query { font-weight: 800; color: var(--accent-green); margin-bottom: 10px; font-size: 1.2rem; }
+        .db-response { color: var(--text-secondary); margin: 0; font-size: 1.1rem; line-height: 1.8; }
+        ul { color: var(--text-secondary); padding-left: 20px; font-size: 1.15rem; line-height: 1.9; }
+        li { margin-bottom: 12px; }
         @media (max-width: 900px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; position: relative; height: auto; padding: 30px; }
@@ -168,14 +153,14 @@
 
     <div class="sidebar">
         <div class="brand-zone">
-            <h1>Climate.Edu</h1>
-            <p>Public Knowledge Base</p>
+            <h1>Climate.Mega</h1>
+            <p>Global Learning Network</p>
         </div>
         <div class="nav-menu">
-            <button class="tab-btn active" onclick="switchPanel(event, 'panel-home')">01 // Welcome & About</button>
-            <button class="tab-btn" onclick="switchPanel(event, 'panel-warming')">02 // Deep Global Warming</button>
-            <button class="tab-btn" onclick="switchPanel(event, 'panel-green')">03 // Green Initiatives</button>
-            <button class="tab-btn" onclick="switchPanel(event, 'panel-data')">04 // 50 Educational Lessons</button>
+            <button class="tab-btn active" onclick="switchPanel(event, 'panel-home')">01 // Executive Welcome</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-warming')">02 // Deep Climate Matrix</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-green')">03 // Strategic Mitigation</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-data')">04 // 50 Scientific Core Lessons</button>
         </div>
     </div>
 
@@ -184,51 +169,40 @@
         <!-- PANEL 1: WELCOME & ABOUT -->
         <div id="panel-home" class="tab-content active">
             <div class="hero-panel">
-                <h2>Welcome to Global Climate Education Portal</h2>
-                <p>An open-access digital library dedicated to explaining the critical realities of climate science, environmental change, and sustainable community solutions to the general public.</p>
+                <h2>Planetary Environmental Education Center</h2>
+                <p>An unrestricted open-source repository designed to systematically break down complex climate mechanics into clear, educational frameworks for global public enlightenment.</p>
             </div>
             <div class="card">
-                <h3>About the Creator</h3>
-                <p>Hi, I am Natati, an EthioCoders graduate certified in programming, Android development, AI, and data analysis. I built this open platform to translate complex climate science into simple, visual, and practical educational resources that empower everyday people to protect our shared planet.</p>
+                <h3>About the Platform Creator</h3>
+                <p>Hi, I am Natati, an EthioCoders framework graduate specializing in data analysis, systems architecture, programming, and predictive software development. I engineered this platform to serve as an interactive educational terminal. By transforming deep climate metrics into scalable web resources, this project empowers citizens and communities worldwide to actively participate in restoring our planetary stability.</p>
             </div>
         </div>
 
         <!-- PANEL 2: DEEP GLOBAL WARMING -->
         <div id="panel-warming" class="tab-content">
             <div class="hero-panel">
-                <h2>Deep Analysis: What is Global Warming?</h2>
-                <p>A comprehensive examination of how greenhouse gases alter Earth's climate system and threaten global ecosystems.</p>
+                <h2>The Dynamics of Global Anthropogenic Warming</h2>
+                <p>An extensive systems analysis investigating the exact chemical, atmospheric, and physical processes destroying our modern biosphere balance.</p>
             </div>
             <div class="card">
-                <h3>1. The Scientific Causes in Detail</h3>
-                <p>Global warming is caused by the greenhouse effect. When humans burn fossil fuels (like coal, oil, and gas) for electricity and transport, they release massive amounts of carbon dioxide (CO2) and methane (CH4). These gases act like a thick glass greenhouse around the planet. They allow sunlight to enter but stop heat from escaping back into space, steadily raising the global temperature.</p>
+                <h3>1. Radiative Forcing and Chemical Saturations</h3>
+                <p>The core mechanism of global warming rests on industrial radiative forcing. Industrial infrastructure, massive vehicle emissions, and constant fossil fuel combustion release vast amounts of greenhouse gases—specifically Carbon Dioxide (CO2), Methane (CH4), and Nitrous Oxide (N2O)—into the atmosphere. These chemical compounds trap longwave thermal infrared radiation reflected from the Earth's surface. Instead of allowing heat to safely escape into deep space, they create a dense thermal blanket that continuously forces the planet's atmospheric temperature upward.</p>
             </div>
             <div class="card">
-                <h3>2. Catastrophic Global Impacts</h3>
-                <p>The continuous rise in temperature triggers systemic environmental damage. Polar ice sheets and glaciers are melting rapidly, causing global sea levels to rise and threatening coastal cities with permanent flooding. Oceans are absorbing excess carbon, leading to acidification that destroys marine life and coral reefs. Furthermore, weather patterns have become highly volatile, causing extreme mega-droughts, devastating wildfires, and catastrophic floods that destroy agriculture and displace communities.</p>
+                <h3>2. The Systemic Domino Effect: Ocean & Ice Collapse</h3>
+                <p>Rising temperatures trigger planetary feedback loops. The massive thermal absorption causes rapid decay in polar ice sheets, releasing billions of gallons of freshwater into the oceans. This drives accelerated sea-level rise, threatening low-lying island archipelagos and coastal hubs with permanent submersion. Simultaneously, oceans absorb excess atmospheric carbon, causing severe ocean acidification. This chemical imbalance destroys coral reefs, dissolves marine calcifiers, and threatens the foundational chains of global marine life.</p>
             </div>
             <div class="card">
-                <h3>3. Most Vulnerable Regions</h3>
-                <ul>
-                    <li><strong>Island Nations (The Maldives, Tuvalu):</strong> Facing total submersion due to rising sea baselines.</li>
-                    <li><strong>Coastal Deltas (Bangladesh):</strong> Undergoing constant monsoonal flooding and severe soil salinization.</li>
-                    <li><strong>Sub-Saharan Africa:</strong> Experiencing intense desertification, failing crop yields, and acute water scarcity.</li>
-                </ul>
+                <h3>3. Severe Extreme Weather and Ecosystem Stress</h3>
+                <p>Atmospheric thermal loading heavily destabilizes global jet streams and moisture distribution models. The result is an aggressive amplification of severe weather extremes. Arid territories experience mega-droughts that completely deplete vital aquifers and cause mass crop failure. Conversely, other regions suffer intense micro-climate precipitation events, causing historic flooding that erodes topsoil, ruins city infrastructure, and displaces millions of human lives.</p>
             </div>
         </div>
 
-        <!-- PANEL 3: GREEN INITIATIVES -->
+        <!-- PANEL 3: STRATEGIC MITIGATION -->
         <div id="panel-green" class="tab-content">
             <div class="hero-panel">
-                <h2>The Green Initiative: Frameworks for Survival</h2>
-                <p>Exploring macro structural transformations and daily community actions needed to heal our biosphere.</p>
+                <h2>The Green Initiative Protocols: Healing the Biosphere</h2>
+                <p>A comprehensive strategic operational guide outlining macro-grid transformations and direct public solutions to reverse ecological damage.</p>
             </div>
             <div class="card">
-                <h3>1. Massive Grid Decarbonization</h3>
-                <p>The primary global solution is to completely phase out fossil-fuel power plants. Nations must transition to 100% renewable energy grids powered by solar panels, wind turbines, and advanced hydro-kinetic systems. This stops carbon emissions at the source.</p>
-            </div>
-            <div class="card">
-                <h3>2. Reforestation and Ecosystem Restoration</h3>
-                <p>Trees are natural carbon sinks. Protecting existing forests and launching mass planting campaigns allows nature to actively absorb billions of tons of CO2 from the atmosphere. A prime example is Ethiopia's <strong>Green Legacy Initiative</strong>, which has planted billions of trees to combat localized droughts and topsoil erosion.</p>
-            </div>
-            <div class="card">
+                <h3>1. Absolute Grid Decarbonization</h3>
