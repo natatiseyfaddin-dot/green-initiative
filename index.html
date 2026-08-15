@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natati - Executive Climate Intelligence & Data Architecture</title>
+    <title>Global Climate Hub - Educational Initiative</title>
     <style>
         :root {
             --bg-main: #0f172a;
@@ -17,23 +17,16 @@
             --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
         body {
-            font-family: 'SF Pro Display', -apple-system, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--bg-main);
             color: var(--text-primary);
             display: flex;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
-        /* PREMIUM SIDEBAR INTERIOR */
         .sidebar {
             width: 320px;
             background-color: var(--bg-sidebar);
@@ -48,10 +41,6 @@
             z-index: 100;
         }
 
-        .brand-zone {
-            margin-bottom: 50px;
-        }
-
         .brand-zone h1 {
             font-size: 1.8rem;
             font-weight: 800;
@@ -64,7 +53,7 @@
         .brand-zone p {
             font-size: 0.85rem;
             color: var(--text-secondary);
-            margin: 5px 0 0 0;
+            margin: 5px 0 30px 0;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
@@ -93,7 +82,6 @@
         .tab-btn:hover {
             color: var(--text-primary);
             background: rgba(255, 255, 255, 0.03);
-            border-color: var(--border-color);
         }
 
         .tab-btn.active {
@@ -103,7 +91,6 @@
             font-weight: 700;
         }
 
-        /* MAIN CONTENT INTERIOR */
         .main-content {
             margin-left: 320px;
             flex-grow: 1;
@@ -113,7 +100,7 @@
 
         .tab-content {
             display: none;
-            animation: slideUp 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: slideUp 0.5s ease;
         }
 
         .tab-content.active {
@@ -121,7 +108,7 @@
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -131,182 +118,117 @@
             padding: 40px;
             border-radius: 24px;
             margin-bottom: 40px;
-            backdrop-filter: blur(12px);
         }
 
-        .hero-panel h2 {
-            font-size: 2.4rem;
-            font-weight: 800;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
+        .hero-panel h2 { font-size: 2.2rem; margin: 0 0 15px 0; }
+        .hero-panel p { font-size: 1.15rem; color: var(--text-secondary); margin: 0; line-height: 1.8; }
 
-        .hero-panel p {
-            font-size: 1.15rem;
-            color: var(--text-secondary);
-            margin: 0;
-            line-height: 1.8;
-        }
-
-        .grid-system {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-            gap: 30px;
-        }
-
-        .data-card {
+        .card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 35px;
-            backdrop-filter: blur(8px);
-            transition: var(--transition);
+            margin-bottom: 30px;
         }
 
-        .data-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-green);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-        }
+        .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.5rem; }
+        .card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; }
 
-        .data-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 15px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .data-card p {
-            font-size: 1.05rem;
-            color: var(--text-secondary);
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        .badge-system {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        .badge {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: var(--accent-green);
-            padding: 8px 18px;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        /* ADVANCED KNOWLEDGE DATA BASE UI */
         .database-container {
-            max-height: 650px;
+            max-height: 600px;
             overflow-y: auto;
             border: 1px solid var(--border-color);
             border-radius: 20px;
             padding: 25px;
             background: rgba(15, 23, 42, 0.6);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .database-container::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .database-container::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 4px;
         }
 
         .db-row {
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 25px;
-            transition: var(--transition);
+            padding: 20px;
+            margin-bottom: 15px;
         }
 
-        .db-row:hover {
-            background: rgba(30, 41, 59, 0.8);
-            border-color: #475569;
-        }
+        .db-query { font-weight: 700; color: var(--accent-green); margin-bottom: 5px; }
+        .db-response { color: var(--text-secondary); margin: 0; }
 
-        .db-query {
-            font-weight: 700;
-            color: var(--accent-green);
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-
-        .db-response {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            margin: 0;
-        }
-
-        footer {
-            margin-top: 100px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 30px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
+        ul { color: var(--text-secondary); padding-left: 20px; font-size: 1.1rem; line-height: 1.8; }
+        li { margin-bottom: 10px; }
 
         @media (max-width: 900px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; position: relative; height: auto; padding: 30px; }
             .main-content { margin-left: 0; padding: 30px 20px; }
-            .grid-system { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- STICKY ENTERPRISE SIDEBAR MENU -->
     <div class="sidebar">
         <div class="brand-zone">
-            <h1>Natati.Intel</h1>
-            <p>Climate Intelligence</p>
+            <h1>Climate.Edu</h1>
+            <p>Public Knowledge Base</p>
         </div>
         <div class="nav-menu">
-            <button class="tab-btn active" onclick="switchPanel(event, 'panel-profile')">01 // Executive Profile</button>
-            <button class="tab-btn" onclick="switchPanel(event, 'panel-matrix')">02 // Climate Core Matrix</button>
-            <button class="tab-btn" onclick="switchPanel(event, 'panel-data')">03 // Global Repository</button>
-            <button class="tab-btn" onclick="switchPanel(event, 'panel-geopolitics')">04 // Strategic Frameworks</button>
+            <button class="tab-btn active" onclick="switchPanel(event, 'panel-home')">01 // Welcome & About</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-warming')">02 // Deep Global Warming</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-green')">03 // Green Initiatives</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-data')">04 // 50 Educational Lessons</button>
         </div>
-        <footer style="margin-top: auto; border: none; padding: 0;">
-            <p>© 2026 Natati Hub.<br>All Security Protocols Verified.</p>
-        </footer>
     </div>
 
-    <!-- MAIN DATA VIEWPORT -->
     <div class="main-content">
         
-        <!-- PANEL 1: PROFILE -->
-        <div id="panel-profile" class="tab-content active">
+        <!-- PANEL 1: WELCOME & ABOUT -->
+        <div id="panel-home" class="tab-content active">
             <div class="hero-panel">
-                <h2>Computational Scholar Profile</h2>
-                <p>An enterprise architecture designed to synthesize advanced data engineering with native mobile infrastructures, creating cross-platform tracking models targeted at carbon reduction and macro climate metrics analysis.</p>
+                <h2>Welcome to Global Climate Education Portal</h2>
+                <p>An open-access digital library dedicated to explaining the critical realities of climate science, environmental change, and sustainable community solutions to the general public.</p>
             </div>
-            <div class="grid-system">
-                <div class="data-card">
-                    <h3>Computational Axes & Competency</h3>
-                    <p>Formal academic certification secured across four foundational horizons of the algorithmic ecosystem via the highly competitive national EthioCoders framework:</p>
-                    <div class="badge-system">
-                        <span class="badge">Advanced Architecture & Systems</span>
-                        <span class="badge">Native Android OS Engineering</span>
-                        <span class="badge">Neural Networks & Predictive AI</span>
-                        <span class="badge">Quantitative Big Data Analysis</span>
-                    </div>
-                </div>
-                <div class="data-card">
-                    <h3>Strategic Global Roadmap</h3>
+            <div class="card">
+                <h3>About the Creator</h3>
+                <p>Hi, I am Natati, an EthioCoders graduate certified in programming, Android development, AI, and data analysis. I built this open platform to translate complex climate science into simple, visual, and practical educational resources that empower everyday people to protect our shared planet.</p>
+            </div>
+        </div>
+
+        <!-- PANEL 2: DEEP GLOBAL WARMING -->
+        <div id="panel-warming" class="tab-content">
+            <div class="hero-panel">
+                <h2>Deep Analysis: What is Global Warming?</h2>
+                <p>A comprehensive examination of how greenhouse gases alter Earth's climate system and threaten global ecosystems.</p>
+            </div>
+            <div class="card">
+                <h3>1. The Scientific Causes in Detail</h3>
+                <p>Global warming is caused by the greenhouse effect. When humans burn fossil fuels (like coal, oil, and gas) for electricity and transport, they release massive amounts of carbon dioxide (CO2) and methane (CH4). These gases act like a thick glass greenhouse around the planet. They allow sunlight to enter but stop heat from escaping back into space, steadily raising the global temperature.</p>
+            </div>
+            <div class="card">
+                <h3>2. Catastrophic Global Impacts</h3>
+                <p>The continuous rise in temperature triggers systemic environmental damage. Polar ice sheets and glaciers are melting rapidly, causing global sea levels to rise and threatening coastal cities with permanent flooding. Oceans are absorbing excess carbon, leading to acidification that destroys marine life and coral reefs. Furthermore, weather patterns have become highly volatile, causing extreme mega-droughts, devastating wildfires, and catastrophic floods that destroy agriculture and displace communities.</p>
+            </div>
+            <div class="card">
+                <h3>3. Most Vulnerable Regions</h3>
+                <ul>
+                    <li><strong>Island Nations (The Maldives, Tuvalu):</strong> Facing total submersion due to rising sea baselines.</li>
+                    <li><strong>Coastal Deltas (Bangladesh):</strong> Undergoing constant monsoonal flooding and severe soil salinization.</li>
+                    <li><strong>Sub-Saharan Africa:</strong> Experiencing intense desertification, failing crop yields, and acute water scarcity.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PANEL 3: GREEN INITIATIVES -->
+        <div id="panel-green" class="tab-content">
+            <div class="hero-panel">
+                <h2>The Green Initiative: Frameworks for Survival</h2>
+                <p>Exploring macro structural transformations and daily community actions needed to heal our biosphere.</p>
+            </div>
+            <div class="card">
+                <h3>1. Massive Grid Decarbonization</h3>
+                <p>The primary global solution is to completely phase out fossil-fuel power plants. Nations must transition to 100% renewable energy grids powered by solar panels, wind turbines, and advanced hydro-kinetic systems. This stops carbon emissions at the source.</p>
+            </div>
+            <div class="card">
+                <h3>2. Reforestation and Ecosystem Restoration</h3>
+                <p>Trees are natural carbon sinks. Protecting existing forests and launching mass planting campaigns allows nature to actively absorb billions of tons of CO2 from the atmosphere. A prime example is Ethiopia's <strong>Green Legacy Initiative</strong>, which has planted billions of trees to combat localized droughts and topsoil erosion.</p>
+            </div>
+            <div class="card">
