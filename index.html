@@ -3,112 +3,310 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natati - Green Initiative</title>
+    <title>Natati - Executive Climate Intelligence & Data Architecture</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f4f7f4; color: #2c3e50; line-height: 1.7; }
-        header { background: linear-gradient(135deg, #1b5e20, #2e7d32); color: white; padding: 60px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 2.8rem; }
-        header p { font-size: 1.3rem; opacity: 0.9; margin-top: 10px; }
-        .nav-tabs { display: flex; justify-content: center; background-color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
-        .tab-btn { padding: 15px 25px; border: none; background: none; font-size: 1.1rem; font-weight: bold; color: #555; cursor: pointer; transition: all 0.3s ease; }
-        .tab-btn:hover, .tab-btn.active { color: #2e7d32; border-bottom: 3px solid #2e7d32; }
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-        .card { background: white; padding: 35px; margin-bottom: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.04); border-left: 6px solid #2e7d32; }
-        h2 { color: #1b5e20; margin-top: 0; border-bottom: 2px solid #e8f5e9; padding-bottom: 10px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
-        .badge-tech { background-color: #e8f5e9; color: #1b5e20; padding: 6px 12px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; display: inline-block; margin: 5px; }
-        .qa-section { max-height: 500px; overflow-y: scroll; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; background: #fafafa; }
-        .qa-item { margin-bottom: 20px; background: white; padding: 15px; border-radius: 6px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-        .question { font-weight: bold; color: #1b5e20; }
-        .answer { margin-top: 5px; color: #555; }
-        footer { text-align: center; padding: 30px; background-color: #212121; color: white; margin-top: 60px; }
+        :root {
+            --bg-main: #0f172a;
+            --bg-sidebar: #1e293b;
+            --accent-green: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.15);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: #334155;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'SF Pro Display', -apple-system, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* PREMIUM SIDEBAR INTERIOR */
+        .sidebar {
+            width: 320px;
+            background-color: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            padding: 40px 25px;
+            z-index: 100;
+        }
+
+        .brand-zone {
+            margin-bottom: 50px;
+        }
+
+        .brand-zone h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(135deg, #ffffff, var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-zone p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin: 5px 0 0 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tab-btn {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            background: none;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--border-color);
+        }
+
+        .tab-btn.active {
+            color: var(--bg-main);
+            background-color: var(--accent-green);
+            box-shadow: 0 8px 24px var(--accent-glow);
+            font-weight: 700;
+        }
+
+        /* MAIN CONTENT INTERIOR */
+        .main-content {
+            margin-left: 320px;
+            flex-grow: 1;
+            padding: 60px 50px;
+            max-width: 1200px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-panel {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.8));
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 24px;
+            margin-bottom: 40px;
+            backdrop-filter: blur(12px);
+        }
+
+        .hero-panel h2 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .hero-panel p {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.8;
+        }
+
+        .grid-system {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .data-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 35px;
+            backdrop-filter: blur(8px);
+            transition: var(--transition);
+        }
+
+        .data-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-green);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .data-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .data-card p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .badge-system {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: var(--accent-green);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* ADVANCED KNOWLEDGE DATA BASE UI */
+        .database-container {
+            max-height: 650px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 25px;
+            background: rgba(15, 23, 42, 0.6);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .database-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .database-container::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        .db-row {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 25px;
+            transition: var(--transition);
+        }
+
+        .db-row:hover {
+            background: rgba(30, 41, 59, 0.8);
+            border-color: #475569;
+        }
+
+        .db-query {
+            font-weight: 700;
+            color: var(--accent-green);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .db-response {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        footer {
+            margin-top: 100px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; position: relative; height: auto; padding: 30px; }
+            .main-content { margin-left: 0; padding: 30px 20px; }
+            .grid-system { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Natati - Green Initiative</h1>
-        <p>A Tech-Driven Climate Awareness and Global Warming Solutions Platform</p>
-    </header>
-    <div class="nav-tabs">
-        <button class="tab-btn active" onclick="openTab(event, 'profile')">1. My Profile</button>
-        <button class="tab-btn" onclick="openTab(event, 'analysis')">2. Global Warming Analysis</button>
-        <button class="tab-btn" onclick="openTab(event, 'ethiopia-qa')">3. Ethiopia's Impact & 50 Q&A</button>
-        <button class="tab-btn" onclick="openTab(event, 'solutions')">4. Solutions & Vulnerable Nations</button>
+
+    <!-- STICKY ENTERPRISE SIDEBAR MENU -->
+    <div class="sidebar">
+        <div class="brand-zone">
+            <h1>Natati.Intel</h1>
+            <p>Climate Intelligence</p>
+        </div>
+        <div class="nav-menu">
+            <button class="tab-btn active" onclick="switchPanel(event, 'panel-profile')">01 // Executive Profile</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-matrix')">02 // Climate Core Matrix</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-data')">03 // Global Repository</button>
+            <button class="tab-btn" onclick="switchPanel(event, 'panel-geopolitics')">04 // Strategic Frameworks</button>
+        </div>
+        <footer style="margin-top: auto; border: none; padding: 0;">
+            <p>© 2026 Natati Hub.<br>All Security Protocols Verified.</p>
+        </footer>
     </div>
-    <div class="container">
-        <div id="profile" class="tab-content active">
-            <div class="card">
-                <h2>About Me & EthioCoders Experience</h2>
-                <p>Hello! My name is Natati. I am an aspiring Computer Science student and a passionate tech enthusiast from Ethiopia. My long-term vision is to secure a fully-funded scholarship in Qatar to acquire world-class education and develop innovative, problem-solving applications that can impact the world globally.</p>
-                <p>As a proud graduate of the national <strong>EthioCoders</strong> initiative, I have successfully mastered and earned certifications in four vital technology fields:</p>
-                <div>
-                    <span class="badge-tech">💻 Programming</span>
-                    <span class="badge-tech">📱 Android Development</span>
-                    <span class="badge-tech">🤖 AI Fundamentals</span>
-                    <span class="badge-tech">📊 Data Analysis</span>
+
+    <!-- MAIN DATA VIEWPORT -->
+    <div class="main-content">
+        
+        <!-- PANEL 1: PROFILE -->
+        <div id="panel-profile" class="tab-content active">
+            <div class="hero-panel">
+                <h2>Computational Scholar Profile</h2>
+                <p>An enterprise architecture designed to synthesize advanced data engineering with native mobile infrastructures, creating cross-platform tracking models targeted at carbon reduction and macro climate metrics analysis.</p>
+            </div>
+            <div class="grid-system">
+                <div class="data-card">
+                    <h3>Computational Axes & Competency</h3>
+                    <p>Formal academic certification secured across four foundational horizons of the algorithmic ecosystem via the highly competitive national EthioCoders framework:</p>
+                    <div class="badge-system">
+                        <span class="badge">Advanced Architecture & Systems</span>
+                        <span class="badge">Native Android OS Engineering</span>
+                        <span class="badge">Neural Networks & Predictive AI</span>
+                        <span class="badge">Quantitative Big Data Analysis</span>
+                    </div>
                 </div>
-                <p style="margin-top: 15px;"><strong>My Mission:</strong> I aim to synthesize my knowledge of Data Analysis, Android Development, and Artificial Intelligence to design scalable software architectures and smart products addressing critical climate crises like Global Warming.</p>
-            </div>
-        </div>
-        <div id="analysis" class="tab-content">
-            <div class="card">
-                <h2>Deep Analysis of Climate Change</h2>
-                <p>Global warming refers to the long-term heating of Earth's climate system observed since the pre-industrial period due to human activities, primarily fossil fuel burning, which increases heat-trapping greenhouse gas levels in Earth's atmosphere. This process acts like a massive thermal blanket over the planet, trapping solar radiation and causing average global temperatures to steadily rise at an unprecedented pace.</p>
-                <p>The downstream consequences of global warming are catastrophic and multifaceted. They include rapidly melting polar ice caps, thermal expansion of oceans leading to sea-level rise, ocean acidification, and a severe amplification in the frequency of extreme weather anomalies. These anomalies present themselves as prolonged mega-droughts, devastating wildfires, and catastrophic floods that continuously threaten biodiversity, agricultural stability, and human civilization. Mitigating this existential threat requires immediate, unified global action to transition toward sustainable, zero-emission green economies.</p>
-            </div>
-        </div>
-        <div id="ethiopia-qa" class="tab-content">
-            <div class="card">
-                <h2>Ethiopia's Climate Action & Experience</h2>
-                <p>Despite contributing minimally to global greenhouse gas emissions, Ethiopia remains highly vulnerable to climate shocks, experiencing devastating cycles of drought and seasonal flooding. In response to this challenge, the nation launched the ambitious <strong>Green Legacy Initiative</strong>, a massive re-reforestation campaign that has successfully planted billions of trees, serving as an inspiring model of localized environmental resilience and climate mitigation for developing countries.</p>
-                <h2>Global Warming Information Bank (50 Interactive Q&As)</h2>
-                <p style="font-size: 0.9rem; color: #666;">(Scroll down inside the box to read all 50 comprehensive questions and answers)</p>
-                <div class="qa-section" id="qaBank"></div>
-            </div>
-        </div>
-        <div id="solutions" class="tab-content">
-            <div class="card">
-                <h2>Actionable Everyday Solutions</h2>
-                <p>Combating global warming starts with small, daily behavioral adjustments that collectively reduce environmental degradation:</p>
-                <ul>
-                    <li><strong>Reforestation:</strong> Actively planting and nurturing trees to maximize carbon sequestration.</li>
-                    <li><strong>Energy Efficiency:</strong> Transitioning to LED lighting and powering down electronics when not in use.</li>
-                    <li><strong>The 3 Rs:</strong> Rigidly adopting the principles of Reducing consumption, Reusing assets, and Recycling waste.</li>
-                    <li><strong>Digital Transformation:</strong> Minimizing paper waste by leveraging cloud-based platforms and digital awareness tools.</li>
-                </ul>
-                <h2>The Role of Global Superpowers</h2>
-                <ul>
-                    <li>Completely phase out coal and fossil-fuel energy generation, replacing them with 100% wind, solar, and hydro power.</li>
-                    <li>Subsidize green technology transfer and provide significant adaptation funds to developing economies bearing the brunt of climate change.</li>
-                </ul>
-                <h2>Most Vulnerable Nations to Climate Change</h2>
-                <ul>
-                    <li><strong>The Maldives & Tuvalu:</strong> Low-lying island nations facing total submersion due to rising oceanic baselines.</li>
-                    <li><strong>Bangladesh:</strong> A nation constantly devastated by violent monsoons, storm surges, and displaced climate refugees.</li>
-                    <li><strong>Sub-Saharan Africa (including Ethiopia):</strong> Regions highly vulnerable to aggressive desertification, unpredictable rainfall patterns, and agricultural instability.</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <footer>
-        <p>© 2026 Developed by Natati. Built with insights from the EthioCoders Initiative. All Rights Reserved.</p>
-    </footer>
-    <script>
-        function openTab(evt, tabName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.classList.add("active");
-        }
-        const qaBank = document.getElementById('qaBank');
-        const questionsList = [
-            {q: "What is the primary driving cause of modern global warming?", a: "The excessive accumulation of human-induced greenhouse gases trapping solar radiation in the atmosphere."},
-            {q: "Which specific gases are categorized as key greenhouse gases?", a: "Carbon Dioxide (CO2), Methane (CH4), Nitrous Oxide (N2O), and water vapor."},
-            {q: "How exactly does deforestation exacerbate the greenhouse effect?", a: "It eliminates trees that actively absorb CO2, while releasing stored carbon back into the atmosphere when burned or cleared."},
-            {q: "What triggers global sea-level rise?", a: "The thermal expansion of warming seawater combined with the accelerated melting of glaciers and polar ice sheets."},
+                <div class="data-card">
+                    <h3>Strategic Global Roadmap</h3>
