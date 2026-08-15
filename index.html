@@ -14,7 +14,6 @@
             --text-secondary: #94a3b8;
             --card-bg: rgba(22, 32, 54, 0.8);
             --border-color: #1e293b;
-            --transition: all 0.3s ease;
         }
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
@@ -25,6 +24,12 @@
             display: flex;
             min-height: 100vh;
         }
+        
+        /* HIDDEN RADIO BUTTONS FOR CSS TABS */
+        input[type="radio"] {
+            display: none;
+        }
+
         .sidebar {
             width: 340px;
             background-color: var(--bg-sidebar);
@@ -58,30 +63,36 @@
             flex-direction: column;
             gap: 12px;
         }
-        .tab-btn {
+        
+        /* PURE CSS TAB BUTTON STYLING */
+        .tab-label {
             display: flex;
             align-items: center;
             padding: 16px 20px;
-            background: none;
-            border: 1px solid transparent;
             border-radius: 12px;
             color: var(--text-secondary);
             font-size: 1rem;
             font-weight: 600;
             text-align: left;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.3s ease;
         }
-        .tab-btn:hover {
+        .tab-label:hover {
             color: var(--text-primary);
             background: rgba(255, 255, 255, 0.02);
         }
-        .tab-btn.active {
+
+        /* TAB FUNCTIONALITY VIA CSS ACTIVATION */
+        #tab1:checked ~ .sidebar .nav-menu .label1,
+        #tab2:checked ~ .sidebar .nav-menu .label2,
+        #tab3:checked ~ .sidebar .nav-menu .label3,
+        #tab4:checked ~ .sidebar .nav-menu .label4 {
             color: var(--bg-main);
             background-color: var(--accent-green);
             box-shadow: 0 8px 24px var(--accent-glow);
             font-weight: 700;
         }
+
         .main-content {
             margin-left: 340px;
             flex-grow: 1;
@@ -92,9 +103,15 @@
             display: none;
             animation: slideUp 0.4s ease;
         }
-        .tab-content.active {
+
+        /* DISPLAY BOX LOGIC ACCORDING TO USER SELECTION */
+        #tab1:checked ~ .main-content #content-home,
+        #tab2:checked ~ .main-content #content-warming,
+        #tab3:checked ~ .main-content #content-green,
+        #tab4:checked ~ .main-content #content-data {
             display: block;
         }
+
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -118,6 +135,7 @@
         }
         .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.7rem; font-weight: 700; }
         .card p { color: var(--text-secondary); font-size: 1.15rem; line-height: 1.9; }
+        
         .database-container {
             border: 1px solid var(--border-color);
             border-radius: 20px;
@@ -126,22 +144,20 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            max-height: 500px;
+            overflow-y: auto;
         }
         .db-row {
             background: rgba(30, 41, 59, 0.3);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 25px;
-            transition: var(--transition);
-        }
-        .db-row:hover {
-            border-color: var(--accent-green);
-            background: rgba(30, 41, 59, 0.5);
         }
         .db-query { font-weight: 800; color: var(--accent-green); margin-bottom: 10px; font-size: 1.2rem; }
         .db-response { color: var(--text-secondary); margin: 0; font-size: 1.1rem; line-height: 1.8; }
         ul { color: var(--text-secondary); padding-left: 20px; font-size: 1.15rem; line-height: 1.9; }
         li { margin-bottom: 12px; }
+        
         @media (max-width: 900px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; position: relative; height: auto; padding: 30px; }
@@ -151,23 +167,29 @@
 </head>
 <body>
 
+    <!-- SYSTEM CORE TABS SELECTORS -->
+    <input type="radio" id="tab1" name="climate-tabs" checked>
+    <input type="radio" id="tab2" name="climate-tabs">
+    <input type="radio" id="tab3" name="climate-tabs">
+    <input type="radio" id="tab4" name="climate-tabs">
+
     <div class="sidebar">
         <div class="brand-zone">
             <h1>Climate.Mega</h1>
             <p>Global Learning Network</p>
         </div>
         <div class="nav-menu">
-            <button class="tab-btn active" onclick="openTab(event, 'panel-home')">01 // Executive Welcome</button>
-            <button class="tab-btn" onclick="openTab(event, 'panel-warming')">02 // Deep Climate Matrix</button>
-            <button class="tab-btn" onclick="openTab(event, 'panel-green')">03 // Strategic Mitigation</button>
-            <button class="tab-btn" onclick="openTab(event, 'panel-data')">04 // 50 Scientific Core Lessons</button>
+            <label for="tab1" class="tab-label label1">01 // Executive Welcome</label>
+            <label for="tab2" class="tab-label label2">02 // Deep Climate Matrix</label>
+            <label for="tab3" class="tab-label label3">03 // Strategic Mitigation</label>
+            <label for="tab4" class="tab-label label4">04 // 50 Scientific Core Lessons</label>
         </div>
     </div>
 
     <div class="main-content">
         
-        <!-- PANEL 1: WELCOME & ABOUT -->
-        <div id="panel-home" class="tab-content active">
+        <!-- PANEL 1: WELCOME -->
+        <div id="content-home" class="tab-content">
             <div class="hero-panel">
                 <h2>Planetary Environmental Education Center</h2>
                 <p>An unrestricted open-source repository designed to systematically break down complex climate mechanics into clear, educational frameworks for global public enlightenment.</p>
@@ -179,7 +201,7 @@
         </div>
 
         <!-- PANEL 2: DEEP GLOBAL WARMING -->
-        <div id="panel-warming" class="tab-content">
+        <div id="content-warming" class="tab-content">
             <div class="hero-panel">
                 <h2>The Dynamics of Global Anthropogenic Warming</h2>
                 <p>An extensive systems analysis investigating the exact chemical, atmospheric, and physical processes destroying our modern biosphere balance.</p>
@@ -194,15 +216,3 @@
             </div>
             <div class="card">
                 <h3>3. Severe Extreme Weather and Ecosystem Stress</h3>
-                <p>Atmospheric thermal loading heavily destabilizes global jet streams and moisture distribution models. The result is an aggressive amplification of severe weather extremes. Arid territories experience mega-droughts that completely deplete vital aquifers and cause mass crop failure. Conversely, other regions suffer intense micro-climate precipitation events, causing historic flooding that erodes topsoil, ruins city infrastructure, and displaces millions of human lives.</p>
-            </div>
-        </div>
-
-        <!-- PANEL 3: STRATEGIC MITIGATION -->
-        <div id="panel-green" class="tab-content">
-            <div class="hero-panel">
-                <h2>The Green Initiative Protocols: Healing the Biosphere</h2>
-                <p>A comprehensive strategic operational guide outlining macro-grid transformations and direct public solutions to reverse ecological damage.</p>
-            </div>
-            <div class="card">
-                <h3>1. Absolute Grid Decarbonization</h3>
