@@ -27,6 +27,11 @@
             min-height: 100vh;
         }
 
+        /* HIDDEN RADIO BUTTONS CONTROL CLIMATE ENGINE */
+        input[type="radio"] {
+            display: none;
+        }
+
         /* FIXED ENTERPRISE SIDEBAR */
         .sidebar {
             width: 340px;
@@ -50,28 +55,44 @@
         }
         .nav-menu { display: flex; flex-direction: column; gap: 12px; }
         
-        .tab-btn {
+        /* PURE CSS TAB LABEL STYLING */
+        .tab-label {
             display: flex; align-items: center; padding: 16px 20px;
             background: none; border: 1px solid transparent; border-radius: 12px;
             color: var(--text-secondary); font-size: 1rem; font-weight: 600;
             text-align: left; cursor: pointer; transition: all 0.3s ease;
         }
-        .tab-btn:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.02); }
-        .tab-btn.active {
-            color: var(--bg-main); background-color: var(--accent-green);
-            box-shadow: 0 8px 24px var(--accent-glow); font-weight: 700;
+        .tab-label:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.02); }
+
+        /* PURE CSS TAB ACTIVATION STATES */
+        #tab1:checked ~ .sidebar .nav-menu .label1,
+        #tab2:checked ~ .sidebar .nav-menu .label2,
+        #tab3:checked ~ .sidebar .nav-menu .label3,
+        #tab4:checked ~ .sidebar .nav-menu .label4 {
+            color: var(--bg-main);
+            background-color: var(--accent-green);
+            box-shadow: 0 8px 24px var(--accent-glow);
+            font-weight: 700;
         }
 
-        /* DYNAMIC INTERACTIVE VIEWPORT */
+        /* DYNAMIC VIEWPORT AREA */
         .main-content {
             margin-left: 340px; flex-grow: 1; padding: 60px 50px; max-width: 1200px;
         }
         .tab-content {
             display: none; animation: slideUp 0.5s ease;
         }
-        .tab-content.active { display: block; }
+
+        /* DISPLAY RELEVANT PACK BASED ON USER TARGET SELECTION */
+        #tab1:checked ~ .main-content #content-welcome,
+        #tab2:checked ~ .main-content #content-matrix,
+        #tab3:checked ~ .main-content #content-local,
+        #tab4:checked ~ .main-content #content-lessons {
+            display: block;
+        }
+
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(15px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -89,7 +110,6 @@
         .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.6rem; }
         .card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; }
 
-        /* INTERACTIVE STEP CARD LOOK */
         .step-box {
             background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color);
             border-radius: 14px; padding: 25px; margin-bottom: 20px;
@@ -98,7 +118,6 @@
         .step-num { font-weight: 800; color: var(--accent-green); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; }
         .step-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
 
-        /* SCIENTIFIC DATA TABLE STYLING */
         .data-table {
             width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(15, 23, 42, 0.4); border-radius: 12px; overflow: hidden;
         }
@@ -112,8 +131,9 @@
             border-radius: 20px; padding: 25px; background: rgba(15, 23, 42, 0.6);
             display: flex; flex-direction: column; gap: 15px;
         }
-        .db-row { background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; }
-        .db-query { font-weight: 800; color: var(--accent-green); margin-bottom: 5px; }
+        .db-row { background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color); border-radius: 14px; padding: 25px; }
+        .db-query { font-weight: 800; color: var(--accent-green); margin-bottom: 10px; font-size: 1.2rem; }
+        .db-response { color: var(--text-secondary); margin: 0; font-size: 1.1rem; line-height: 1.8; }
         
         @media (max-width: 900px) {
             body { flex-direction: column; }
@@ -124,6 +144,12 @@
 </head>
 <body>
 
+    <!-- SYSTEM PURE CSS SIGNAL CHANNELS -->
+    <input type="radio" id="tab1" name="climate-system-tabs" checked>
+    <input type="radio" id="tab2" name="climate-system-tabs">
+    <input type="radio" id="tab3" name="climate-system-tabs">
+    <input type="radio" id="tab4" name="climate-system-tabs">
+
     <!-- STICKY CONTROL DASHBOARD -->
     <div class="sidebar">
         <div class="brand-zone">
@@ -131,18 +157,18 @@
             <p>Interactive Network</p>
         </div>
         <div class="nav-menu">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab-welcome')">01 // Platform Profile</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-matrix')">02 // Deep Climate Matrix</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-local')">03 // Public Action Steps</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab-lessons')">04 // 50 Scientific Core Lessons</button>
+            <label for="tab1" class="tab-label label1">01 // Platform Profile</label>
+            <label for="tab2" class="tab-label label2">02 // Deep Climate Matrix</label>
+            <label for="tab3" class="tab-label label3">03 // Public Action Steps</label>
+            <label for="tab4" class="tab-label label4">04 // 50 Scientific Core Lessons</label>
         </div>
     </div>
 
-    <!-- MAIN INTERACTIVE DISPLAY PANEL -->
+    <!-- MAIN DISPLAY VIEWPORT -->
     <div class="main-content">
         
         <!-- PAGE 1: WELCOME PROFILE -->
-        <div id="tab-welcome" class="tab-content active">
+        <div id="content-welcome" class="tab-content">
             <div class="hero-panel">
                 <h2>Planetary Environmental Education Center</h2>
                 <p>An interactive, multi-page data architecture engineered to bridge advanced systems technology with actionable community education frameworks.</p>
@@ -154,7 +180,7 @@
         </div>
 
         <!-- PAGE 2: SCIENTIFIC DATA MATRIX -->
-        <div id="tab-matrix" class="tab-content">
+        <div id="content-matrix" class="tab-content">
             <div class="hero-panel">
                 <h2>The Chemical & Physical Metrics of Global Warming</h2>
                 <p>Explore empirical scientific data tracking industrial greenhouse gas accumulations and ocean system stresses.</p>
@@ -187,22 +213,3 @@
                         </tr>
                         <tr>
                             <td>Global Sea Level Rise</td>
-                            <td>0.0 mm Baseline Reference</td>
-                            <td>+103 mm Cumulative Rise</td>
-                            <td>Submersion Threat to Island Archipelagos</td>
-                        </tr>
-                        <tr>
-                            <td>Ocean Surface Acidity</td>
-                            <td>8.21 pH Units</td>
-                            <td>8.10 pH Units (30% Acid Strike)</td>
-                            <td>Dissolution of Global Coral Reef Systems</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- PAGE 3: ACTIONABLE LOCAL STEPS -->
-        <div id="tab-local" class="tab-content">
-            <div class="hero-panel">
-                <h2>Everyday Citizens Public Action Guide</h2>
