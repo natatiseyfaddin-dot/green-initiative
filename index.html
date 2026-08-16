@@ -3,213 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Climate Intelligence Dashboard & Action Hub</title>
+    <title>Global Climate Encyclopedia & Public Learning Repository</title>
     <style>
         :root {
             --bg-main: #0b0f19;
             --bg-sidebar: #131c2e;
             --accent-green: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.2);
+            --accent-red: #ef4444;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --card-bg: rgba(22, 32, 54, 0.8);
             --border-color: #1e293b;
         }
         
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
+
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
-            padding: 0;
             background-color: var(--bg-main);
             color: var(--text-primary);
             display: flex;
             min-height: 100vh;
         }
 
-        /* HIDDEN RADIO BUTTONS CONTROL CLIMATE ENGINE */
-        input[type="radio"] {
-            display: none;
-        }
-
-        /* FIXED ENTERPRISE SIDEBAR */
+        /* FIXED PREMIUM SIDEBAR NAVIGATION WITH SMOOTH SCROLL MARKS */
         .sidebar {
-            width: 340px;
+            width: 300px;
             background-color: var(--bg-sidebar);
             border-right: 1px solid var(--border-color);
             position: fixed;
-            top: 0; bottom: 0; left: 0;
-            display: flex;
-            flex-direction: column;
-            padding: 40px 25px;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            padding: 40px 20px;
             z-index: 100;
         }
-        .brand-zone h1 {
-            font-size: 2rem; font-weight: 800; margin: 0;
-            background: linear-gradient(135deg, #ffffff, var(--accent-green));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .brand-zone p {
-            font-size: 0.85rem; color: var(--text-secondary); margin: 5px 0 40px 0;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-        .nav-menu { display: flex; flex-direction: column; gap: 12px; }
-        
-        /* PURE CSS TAB LABEL STYLING */
-        .tab-label {
-            display: flex; align-items: center; padding: 16px 20px;
-            background: none; border: 1px solid transparent; border-radius: 12px;
-            color: var(--text-secondary); font-size: 1rem; font-weight: 600;
-            text-align: left; cursor: pointer; transition: all 0.3s ease;
-        }
-        .tab-label:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.02); }
 
-        /* PURE CSS TAB ACTIVATION STATES */
-        #tab1:checked ~ .sidebar .nav-menu .label1,
-        #tab2:checked ~ .sidebar .nav-menu .label2,
-        #tab3:checked ~ .sidebar .nav-menu .label3,
-        #tab4:checked ~ .sidebar .nav-menu .label4 {
-            color: var(--bg-main);
-            background-color: var(--accent-green);
-            box-shadow: 0 8px 24px var(--accent-glow);
-            font-weight: 700;
-        }
+        .brand-zone h1 { font-size: 1.8rem; font-weight: 800; color: #ffffff; margin: 0 0 5px 0; }
+        .brand-zone p { font-size: 0.8rem; color: var(--accent-green); text-transform: uppercase; margin: 0 0 40px 0; }
 
-        /* DYNAMIC VIEWPORT AREA */
+        .nav-menu { display: flex; flex-direction: column; gap: 10px; }
+        .nav-link {
+            padding: 15px;
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
+
+        /* MAIN CONTENT AREA */
         .main-content {
-            margin-left: 340px; flex-grow: 1; padding: 60px 50px; max-width: 1200px;
-        }
-        .tab-content {
-            display: none; animation: slideUp 0.5s ease;
-        }
-
-        /* DISPLAY RELEVANT PACK BASED ON USER TARGET SELECTION */
-        #tab1:checked ~ .main-content #content-welcome,
-        #tab2:checked ~ .main-content #content-matrix,
-        #tab3:checked ~ .main-content #content-local,
-        #tab4:checked ~ .main-content #content-lessons {
-            display: block;
+            margin-left: 300px;
+            padding: 40px;
+            max-width: 1000px;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero-panel {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7));
-            border: 1px solid var(--border-color); padding: 45px; border-radius: 24px; margin-bottom: 40px;
-        }
-        .hero-panel h2 { font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; }
-        .hero-panel p { font-size: 1.2rem; color: var(--text-secondary); margin: 0; line-height: 1.8; }
-        
+        .section-wrapper { padding-top: 60px; border-bottom: 1px solid var(--border-color); padding-bottom: 40px; }
         .card {
-            background-color: var(--card-bg); border: 1px solid var(--border-color);
-            border-radius: 20px; padding: 40px; margin-bottom: 35px;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
         }
-        .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.6rem; }
-        .card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; }
-
-        .step-box {
-            background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color);
-            border-radius: 14px; padding: 25px; margin-bottom: 20px;
-            border-left: 5px solid var(--accent-green);
-        }
-        .step-num { font-weight: 800; color: var(--accent-green); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; }
-        .step-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
-
-        .data-table {
-            width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(15, 23, 42, 0.4); border-radius: 12px; overflow: hidden;
-        }
-        .data-table th, .data-table td { padding: 15px 20px; text-align: left; }
-        .data-table th { background-color: var(--bg-sidebar); color: var(--accent-green); font-weight: 700; border-bottom: 2px solid var(--border-color); }
-        .data-table td { border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
-        .data-table tr:hover { background: rgba(255,255,255,0.02); }
-
-        .database-container {
-            max-height: 500px; overflow-y: auto; border: 1px solid var(--border-color);
-            border-radius: 20px; padding: 25px; background: rgba(15, 23, 42, 0.6);
-            display: flex; flex-direction: column; gap: 15px;
-        }
-        .db-row { background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color); border-radius: 14px; padding: 25px; }
-        .db-query { font-weight: 800; color: var(--accent-green); margin-bottom: 10px; font-size: 1.2rem; }
-        .db-response { color: var(--text-secondary); margin: 0; font-size: 1.1rem; line-height: 1.8; }
+        .card h3 { color: var(--accent-green); margin-top: 0; }
         
-        @media (max-width: 900px) {
+        /* VISUAL GALLERY */
+        .visual-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .visual-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .visual-card img { width: 100%; height: 200px; object-fit: cover; }
+        .visual-info { padding: 20px; }
+        .harm-tag { color: var(--accent-red); font-weight: bold; font-size: 0.8rem; }
+        .benefit-tag { color: var(--accent-green); font-weight: bold; font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
             body { flex-direction: column; }
-            .sidebar { width: 100%; position: relative; height: auto; padding: 30px; }
-            .main-content { margin-left: 0; padding: 30px 20px; }
+            .sidebar { width: 100%; position: relative; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .main-content { margin-left: 0; padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SYSTEM PURE CSS SIGNAL CHANNELS -->
-    <input type="radio" id="tab1" name="climate-system-tabs" checked>
-    <input type="radio" id="tab2" name="climate-system-tabs">
-    <input type="radio" id="tab3" name="climate-system-tabs">
-    <input type="radio" id="tab4" name="climate-system-tabs">
-
-    <!-- STICKY CONTROL DASHBOARD -->
+    <!-- NAVIGATION SIDEBAR -->
     <div class="sidebar">
         <div class="brand-zone">
-            <h1>Climate.Hub</h1>
-            <p>Interactive Network</p>
+            <h1>Climate.Mega</h1>
+            <p>Public Learning Network</p>
         </div>
         <div class="nav-menu">
-            <label for="tab1" class="tab-label label1">01 // Platform Profile</label>
-            <label for="tab2" class="tab-label label2">02 // Deep Climate Matrix</label>
-            <label for="tab3" class="tab-label label3">03 // Public Action Steps</label>
-            <label for="tab4" class="tab-label label4">04 // 50 Scientific Core Lessons</label>
+            <a href="#welcome" class="nav-link">01 // Overview</a>
+            <a href="#warming" class="nav-link">02 // Climate Matrix</a>
+            <a href="#mitigation" class="nav-link">03 // Solutions</a>
+            <a href="#lessons" class="nav-link">04 // Visual Lessons</a>
         </div>
     </div>
 
-    <!-- MAIN DISPLAY VIEWPORT -->
+    <!-- MAIN CONTENT -->
     <div class="main-content">
         
-        <!-- PAGE 1: WELCOME PROFILE -->
-        <div id="content-welcome" class="tab-content">
-            <div class="hero-panel">
-                <h2>Planetary Environmental Education Center</h2>
-                <p>An interactive, multi-page data architecture engineered to bridge advanced systems technology with actionable community education frameworks.</p>
-            </div>
+        <div id="welcome" class="section-wrapper">
+            <h2>Planetary Environmental Education</h2>
             <div class="card">
-                <h3>About the Platform Creator</h3>
-                <p>Hi, I am Natati, an EthioCoders framework graduate specializing in data analysis, systems architecture, programming, and predictive software development. I engineered this multi-page platform to resolve traditional content limitations. By converting complex environmental metrics into dynamic web layouts, this network empowers citizens to actively implement daily planetary defense strategies.</p>
+                <p>Welcome, I am Natati, an EthioCoders graduate specializing in data analysis and system simulation. This platform transforms complex climate data into accessible, actionable insights for public education [olGE09].</p>
             </div>
         </div>
 
-        <!-- PAGE 2: SCIENTIFIC DATA MATRIX -->
-        <div id="content-matrix" class="tab-content">
-            <div class="hero-panel">
-                <h2>The Chemical & Physical Metrics of Global Warming</h2>
-                <p>Explore empirical scientific data tracking industrial greenhouse gas accumulations and ocean system stresses.</p>
+        <div id="warming" class="section-wrapper">
+            <h2>The Dynamics of Global Warming</h2>
+            <div class="card">
+                <h3>1. Industrial Forcing</h3>
+                <p>CO2 and Methane (CH4) trap longwave infrared radiation, acting as a greenhouse blanket that forces atmospheric temperatures upward [olGE09].</p>
             </div>
             <div class="card">
-                <h3>Empirical Climate System Data Matrix</h3>
-                <p>The following structural table demonstrates documented shifts across global atmospheric parameters since industrial baselines:</p>
-                
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th>Environmental Metric</th>
-                            <th>Pre-Industrial Baseline</th>
-                            <th>Current Saturation Level</th>
-                            <th>Primary Vector Impact</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Carbon Dioxide (CO2)</td>
-                            <td>280 Parts Per Million (ppm)</td>
-                            <td>422 Parts Per Million (ppm)</td>
-                            <td>Amplified Atmospheric Heat Retention</td>
-                        </tr>
-                        <tr>
-                            <td>Methane Gas (CH4)</td>
-                            <td>722 Parts Per Billion (ppb)</td>
-                            <td>1,920 Parts Per Billion (ppb)</td>
-                            <td>Accelerated Short-Term Forcing Anomalies</td>
-                        </tr>
-                        <tr>
-                            <td>Global Sea Level Rise</td>
+                <h3>2. Systemic Ocean Crisis</h3>
+                <p>Rapid thermal absorption causes massive ice sheet decay, leading to accelerated sea-level rise and severe ocean acidification, which destroys marine ecosystems [olGE09].</p>
+            </div>
+        </div>
+
+        <div id="mitigation" class="section-wrapper">
+            <h2>The Green Initiative Protocols</h2>
+            <div class="card">
+                <h3>1. Grid Decarbonization</h3>
+                <p>Urgent transition to 100% renewable energy grids (solar, wind) is mandatory to halt CO2 emissions [olGE09].</p>
+            </div>
+            <div class="card">
+                <h3>2. Ecological Restoration</h3>
+                <p>Mass afforestation, modeled on initiatives like Ethiopia's Green Legacy, restores soil health and creates natural carbon sinks [olGE09].</p>
+            </div>
+        </div>
+
+        <div id="lessons" class="section-wrapper">
+            <h2>Scientific Core Lessons (Visualized)</h2>
+            <div class="visual-grid">
+                <div class="visual-card">
+                    <img src="https://unsplash.com" alt="Drought">
+                    <div class="visual-info">
+                        <span class="harm-tag">SYSTEMS HARM</span>
+                        <h4>Desertification & Aquifer Decay</h4>
+                        <p>Thermal spikes turn agricultural land into arid desert [olGE09].</p>
+                    </div>
+                </div>
+                <div class="visual-card">
+                    <img src="https://unsplash.com" alt="Forest">
+                    <div class="visual-info">
+                        <span class="benefit-tag">SYSTEMS BENEFIT</span>
+                        <h4>Carbon Sequestration</h4>
+                        <p>Tree planting restores moisture and captures CO2 [olGE09].</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
