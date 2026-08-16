@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Climate Encyclopedia & Public Learning Repository</title>
+    <title>Global Climate Intelligence Dashboard & Action Hub</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -16,11 +16,7 @@
             --border-color: #1e293b;
         }
         
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
+        * { box-sizing: border-box; }
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             margin: 0;
@@ -31,164 +27,94 @@
             min-height: 100vh;
         }
 
-        /* FIXED PREMIUM SIDEBAR NAVIGATION */
+        /* FIXED ENTERPRISE SIDEBAR */
         .sidebar {
             width: 340px;
             background-color: var(--bg-sidebar);
             border-right: 1px solid var(--border-color);
             position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
+            top: 0; bottom: 0; left: 0;
             display: flex;
             flex-direction: column;
             padding: 40px 25px;
             z-index: 100;
         }
-
         .brand-zone h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 0;
+            font-size: 2rem; font-weight: 800; margin: 0;
             background: linear-gradient(135deg, #ffffff, var(--accent-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-
         .brand-zone p {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin: 5px 0 40px 0;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            font-size: 0.85rem; color: var(--text-secondary); margin: 5px 0 40px 0;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .nav-menu { display: flex; flex-direction: column; gap: 12px; }
+        
+        .tab-btn {
+            display: flex; align-items: center; padding: 16px 20px;
+            background: none; border: 1px solid transparent; border-radius: 12px;
+            color: var(--text-secondary); font-size: 1rem; font-weight: 600;
+            text-align: left; cursor: pointer; transition: all 0.3s ease;
+        }
+        .tab-btn:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.02); }
+        .tab-btn.active {
+            color: var(--bg-main); background-color: var(--accent-green);
+            box-shadow: 0 8px 24px var(--accent-glow); font-weight: 700;
         }
 
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 16px 20px;
-            border-radius: 12px;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: 1px solid transparent;
-        }
-
-        .nav-link:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.02);
-            border-color: var(--border-color);
-        }
-
-        /* MAIN CONTENT AREA */
+        /* DYNAMIC INTERACTIVE VIEWPORT */
         .main-content {
-            margin-left: 340px;
-            flex-grow: 1;
-            padding: 60px 50px;
-            max-width: 1200px;
+            margin-left: 340px; flex-grow: 1; padding: 60px 50px; max-width: 1200px;
         }
-
-        .section-wrapper {
-            padding-top: 40px;
-            margin-bottom: 60px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 40px;
+        .tab-content {
+            display: none; animation: slideUp 0.5s ease;
+        }
+        .tab-content.active { display: block; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-panel {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.7));
-            border: 1px solid var(--border-color);
-            padding: 45px;
-            border-radius: 24px;
-            margin-bottom: 40px;
+            border: 1px solid var(--border-color); padding: 45px; border-radius: 24px; margin-bottom: 40px;
         }
-
-        .hero-panel h2 { 
-            font-size: 2.5rem; 
-            margin: 0 0 15px 0; 
-            font-weight: 800; 
-            color: #ffffff;
-        }
-
-        .hero-panel p { 
-            font-size: 1.2rem; 
-            color: var(--text-secondary); 
-            margin: 0; 
-            line-height: 1.8; 
-        }
-
+        .hero-panel h2 { font-size: 2.5rem; margin: 0 0 15px 0; font-weight: 800; }
+        .hero-panel p { font-size: 1.2rem; color: var(--text-secondary); margin: 0; line-height: 1.8; }
+        
         .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 35px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background-color: var(--card-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 40px; margin-bottom: 35px;
         }
+        .card h3 { color: var(--accent-green); margin-top: 0; font-size: 1.6rem; }
+        .card p { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; }
 
-        .card h3 { 
-            color: var(--accent-green); 
-            margin-top: 0; 
-            font-size: 1.7rem; 
-            font-weight: 700; 
+        /* INTERACTIVE STEP CARD LOOK */
+        .step-box {
+            background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 25px; margin-bottom: 20px;
+            border-left: 5px solid var(--accent-green);
         }
+        .step-num { font-weight: 800; color: var(--accent-green); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 5px; }
+        .step-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
 
-        .card p { 
-            color: var(--text-secondary); 
-            font-size: 1.15rem; 
-            line-height: 1.9; 
+        /* SCIENTIFIC DATA TABLE STYLING */
+        .data-table {
+            width: 100%; border-collapse: collapse; margin-top: 20px; background: rgba(15, 23, 42, 0.4); border-radius: 12px; overflow: hidden;
         }
+        .data-table th, .data-table td { padding: 15px 20px; text-align: left; }
+        .data-table th { background-color: var(--bg-sidebar); color: var(--accent-green); font-weight: 700; border-bottom: 2px solid var(--border-color); }
+        .data-table td { border-bottom: 1px solid var(--border-color); color: var(--text-secondary); }
+        .data-table tr:hover { background: rgba(255,255,255,0.02); }
 
         .database-container {
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 30px;
-            background: rgba(15, 23, 42, 0.5);
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            max-height: 500px; overflow-y: auto; border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 25px; background: rgba(15, 23, 42, 0.6);
+            display: flex; flex-direction: column; gap: 15px;
         }
-
-        .db-row {
-            background: rgba(30, 41, 59, 0.3);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 25px;
-        }
-
-        .db-query { 
-            font-weight: 800; 
-            color: var(--accent-green); 
-            margin-bottom: 10px; 
-            font-size: 1.2rem; 
-        }
-
-        .db-response { 
-            color: var(--text-secondary); 
-            margin: 0; 
-            font-size: 1.1rem; 
-            line-height: 1.8; 
-        }
-
-        ul { 
-            color: var(--text-secondary); 
-            padding-left: 20px; 
-            font-size: 1.15rem; 
-            line-height: 1.9; 
-        }
-
-        li { 
-            margin-bottom: 12px; 
-        }
-
+        .db-row { background: rgba(30, 41, 59, 0.3); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px; }
+        .db-query { font-weight: 800; color: var(--accent-green); margin-bottom: 5px; }
+        
         @media (max-width: 900px) {
             body { flex-direction: column; }
             .sidebar { width: 100%; position: relative; height: auto; padding: 30px; }
@@ -198,60 +124,85 @@
 </head>
 <body>
 
-    <!-- NAVIGATION SIDEBAR PANEL -->
+    <!-- STICKY CONTROL DASHBOARD -->
     <div class="sidebar">
         <div class="brand-zone">
-            <h1>Climate.Mega</h1>
-            <p>Global Learning Network</p>
+            <h1>Climate.Hub</h1>
+            <p>Interactive Network</p>
         </div>
         <div class="nav-menu">
-            <a href="#section-welcome" class="nav-link">01 // Welcome Overview</a>
-            <a href="#section-warming" class="nav-link">02 // Deep Climate Matrix</a>
-            <a href="#section-mitigation" class="nav-link">03 // Strategic Mitigation</a>
-            <a href="#section-lessons" class="nav-link">04 // 50 Scientific Core Lessons</a>
+            <button class="tab-btn active" onclick="switchTab(event, 'tab-welcome')">01 // Platform Profile</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-matrix')">02 // Deep Climate Matrix</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-local')">03 // Public Action Steps</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab-lessons')">04 // 50 Scientific Core Lessons</button>
         </div>
     </div>
 
-    <!-- MAIN SMOOTH SCROLL VIEWPORT -->
+    <!-- MAIN INTERACTIVE DISPLAY PANEL -->
     <div class="main-content">
         
-        <!-- SECTION 1: WELCOME -->
-        <div id="section-welcome" class="section-wrapper">
+        <!-- PAGE 1: WELCOME PROFILE -->
+        <div id="tab-welcome" class="tab-content active">
             <div class="hero-panel">
                 <h2>Planetary Environmental Education Center</h2>
-                <p>An unrestricted open-source repository designed to systematically break down complex climate mechanics into clear, educational frameworks for global public enlightenment.</p>
+                <p>An interactive, multi-page data architecture engineered to bridge advanced systems technology with actionable community education frameworks.</p>
             </div>
             <div class="card">
                 <h3>About the Platform Creator</h3>
-                <p>Hi, I am Natati, an EthioCoders framework graduate specializing in data analysis, systems architecture, programming, and predictive software development. I engineered this platform to serve as an interactive educational terminal. By transforming deep climate metrics into scalable web resources, this project empowers citizens and communities worldwide to actively participate in restoring our planetary stability.</p>
+                <p>Hi, I am Natati, an EthioCoders framework graduate specializing in data analysis, systems architecture, programming, and predictive software development. I engineered this multi-page platform to resolve traditional content limitations. By converting complex environmental metrics into dynamic web layouts, this network empowers citizens to actively implement daily planetary defense strategies.</p>
             </div>
         </div>
 
-        <!-- SECTION 2: DEEP GLOBAL WARMING -->
-        <div id="section-warming" class="section-wrapper">
+        <!-- PAGE 2: SCIENTIFIC DATA MATRIX -->
+        <div id="tab-matrix" class="tab-content">
             <div class="hero-panel">
-                <h2>The Dynamics of Global Anthropogenic Warming</h2>
-                <p>An extensive systems analysis investigating the exact chemical, atmospheric, and physical processes destroying our modern biosphere balance.</p>
+                <h2>The Chemical & Physical Metrics of Global Warming</h2>
+                <p>Explore empirical scientific data tracking industrial greenhouse gas accumulations and ocean system stresses.</p>
             </div>
             <div class="card">
-                <h3>1. Radiative Forcing and Chemical Saturations</h3>
-                <p>The core mechanism of global warming rests on industrial radiative forcing. Industrial infrastructure, massive vehicle emissions, and constant fossil fuel combustion release vast amounts of greenhouse gases—specifically Carbon Dioxide (CO2), Methane (CH4), and Nitrous Oxide (N2O)—into the atmosphere. These chemical compounds trap longwave thermal infrared radiation reflected from the Earth's surface. Instead of allowing heat to safely escape into deep space, they create a dense thermal blanket that continuously forces the planet's atmospheric temperature upward.</p>
-            </div>
-            <div class="card">
-                <h3>2. The Systemic Domino Effect: Ocean & Ice Collapse</h3>
-                <p>Rising temperatures trigger planetary feedback loops. The massive thermal absorption causes rapid decay in polar ice sheets, releasing billions of gallons of freshwater into the oceans. This drives accelerated sea-level rise, threatening low-lying island archipelagos and coastal hubs with permanent submersion. Simultaneously, oceans absorb excess atmospheric carbon, causing severe ocean acidification. This chemical imbalance destroys coral reefs, dissolves marine calcifiers, and threatens the foundational chains of global marine life.</p>
-            </div>
-            <div class="card">
-                <h3>3. Severe Extreme Weather and Ecosystem Stress</h3>
-                <p>Atmospheric thermal loading heavily destabilizes global jet streams and moisture distribution models. The result is an aggressive amplification of severe weather extremes. Arid territories experience mega-droughts that completely deplete vital aquifers and cause mass crop failure. Conversely, other regions suffer intense micro-climate precipitation events, causing historic flooding that erodes topsoil, ruins city infrastructure, and displaces millions of human lives.</p>
+                <h3>Empirical Climate System Data Matrix</h3>
+                <p>The following structural table demonstrates documented shifts across global atmospheric parameters since industrial baselines:</p>
+                
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Environmental Metric</th>
+                            <th>Pre-Industrial Baseline</th>
+                            <th>Current Saturation Level</th>
+                            <th>Primary Vector Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Carbon Dioxide (CO2)</td>
+                            <td>280 Parts Per Million (ppm)</td>
+                            <td>422 Parts Per Million (ppm)</td>
+                            <td>Amplified Atmospheric Heat Retention</td>
+                        </tr>
+                        <tr>
+                            <td>Methane Gas (CH4)</td>
+                            <td>722 Parts Per Billion (ppb)</td>
+                            <td>1,920 Parts Per Billion (ppb)</td>
+                            <td>Accelerated Short-Term Forcing Anomalies</td>
+                        </tr>
+                        <tr>
+                            <td>Global Sea Level Rise</td>
+                            <td>0.0 mm Baseline Reference</td>
+                            <td>+103 mm Cumulative Rise</td>
+                            <td>Submersion Threat to Island Archipelagos</td>
+                        </tr>
+                        <tr>
+                            <td>Ocean Surface Acidity</td>
+                            <td>8.21 pH Units</td>
+                            <td>8.10 pH Units (30% Acid Strike)</td>
+                            <td>Dissolution of Global Coral Reef Systems</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- SECTION 3: STRATEGIC MITIGATION -->
-        <div id="section-mitigation" class="section-wrapper">
+        <!-- PAGE 3: ACTIONABLE LOCAL STEPS -->
+        <div id="tab-local" class="tab-content">
             <div class="hero-panel">
-                <h2>The Green Initiative Protocols: Healing the Biosphere</h2>
-                <p>A comprehensive strategic operational guide outlining macro-grid transformations and direct public solutions to reverse ecological damage.</p>
-            </div>
-            <div class="card">
-                <h3>1. Absolute Grid Decarbonization</h3>
+                <h2>Everyday Citizens Public Action Guide</h2>
